@@ -1,17 +1,12 @@
 package main
 
 import (
-	"log"
-	"os"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	f, err := os.OpenFile("logs.txt", os.O_RDWR|os.O_APPEND, 0666)
+	router := gin.New()
+	router.Use(gin.Logger())
 
-	if err != nil {
-		log.Println("error in opening the file")
-		log.Fatalln(err)
-	}
-
-	defer f.Close()
+	router.Run(":8081")
 }
